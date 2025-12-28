@@ -24,6 +24,11 @@ export const clearVaultkey = (userId: string) =>{
     vaultSessionKeys.delete(userId);
 }
 
+export const getVaultKey = (userId: string): Buffer | undefined => {
+  return vaultSessionKeys.get(userId);
+};
+
+
 export const isVaultunlocked = (userId:string): boolean => {
     return vaultSessionKeys.has(userId);
 }
