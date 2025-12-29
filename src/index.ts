@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
+
 import app from "./server";
 import express from "express";
 import authRoutes from "./routes/auth.routes";
@@ -8,6 +9,8 @@ import vaultRoutes from './routes/vault.routes'
 import filesRoutes from "./routes/files.routes";
 import morgan from "morgan";
 import recoveryRoutes from "./routes/recovery.routes";
+import passport from "passport";
+import "./controllers/google.strategy";
 
 const PORT = 3131;
 
@@ -16,6 +19,8 @@ app.use(morgan("combined"));
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(passport.initialize());
 
 
 app.use("/recovery", recoveryRoutes);
