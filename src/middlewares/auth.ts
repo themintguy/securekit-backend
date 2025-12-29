@@ -6,7 +6,7 @@ export interface AuthRequest extends Request {
   user?: {
     id: string;
     email: string;
-  };
+  } | any;
 }
 
 export const auth = (req: AuthRequest, _res: Response, next: NextFunction) => {
