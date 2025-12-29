@@ -1,17 +1,23 @@
-// utils/jwtCookies.ts
 import jwt from "jsonwebtoken";
 import { Response } from "express";
 
 export const issueAuthCookies = (res: Response, userId: string) => {
+  const accessSecret = process.env.JWT_SECRET;
+  const refreshSecret = process.env.JWT_REFRESH_SECRET;
+
+  if (!accessSecret || !refreshSecret) {
+    throw new Error("JWT secrets are not configured");
+  }
+
   const accessToken = jwt.sign(
     { sub: userId },
-    process.env.JWT_ACCESS_SECRET!,
+    accessSecret,
     { expiresIn: "15m" }
   );
 
   const refreshToken = jwt.sign(
     { sub: userId },
-    process.env.JWT_REFRESH_SECRET!,
+    refreshSecret,
     { expiresIn: "7d" }
   );
 

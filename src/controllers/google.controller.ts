@@ -6,8 +6,5 @@ export const googleCallback = (req: Request, res: Response) => {
 
   issueAuthCookies(res, user.id);
 
-  res.json({
-    status: "success",
-    message: "Google login successful",
-  });
+ res.redirect("https://securekit.k31.tech");
 };
