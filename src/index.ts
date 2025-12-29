@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import vaultRoutes from './routes/vault.routes'
 import filesRoutes from "./routes/files.routes";
 import morgan from "morgan";
+import recoveryRoutes from "./routes/recovery.routes";
 
 const PORT = 3131;
 
@@ -16,6 +17,8 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(cookieParser());
 
+
+app.use("/recovery", recoveryRoutes);
 app.use("/v1/auth", authRoutes);
 app.use("/vault",vaultRoutes);
 app.use("/files",filesRoutes);
