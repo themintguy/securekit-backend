@@ -18,10 +18,14 @@ FROM node:20-alpine AS production
 
 WORKDIR /app
 
-RUN npm i -g pnpm
+COPY package.json pnpm-lock.yaml ./
 
-COPY --from=builder /app/package.json /app/pnpm-lock.yaml* ./
-COPY --from=builder /app/node_modules ./node_modules
+
+RUN npm install -g pnpm \
+  && pnpm install --frozen-lockfile --prod \
+  && pnpm store prune \
+  && rm -rf /root/.npm
+
 COPY --from=builder /app/dist ./dist
 EXPOSE 3131
 CMD [ "node", "dist/index.js" ]
