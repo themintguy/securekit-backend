@@ -11,6 +11,7 @@ import morgan from "morgan";
 import recoveryRoutes from "./routes/recovery.routes";
 import passport from "passport";
 import "./controllers/google.strategy";
+import usersRoutes from "./routes/users.routes";
 
 const PORT = 3131;
 
@@ -27,6 +28,10 @@ app.use("/recovery", recoveryRoutes);
 app.use("/v1/auth", authRoutes);
 app.use("/vault",vaultRoutes);
 app.use("/files",filesRoutes);
+
+
+app.use("/users", usersRoutes);
+
 
 
 
