@@ -55,15 +55,17 @@ export const login = catchAsync(async (req: Request, res: Response) => {
   res.cookie("access_token", accessToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 10 * 60 * 1000,
+    path: "/",
   });
 
   res.cookie("refresh_token", refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 24 * 60 * 60 * 1000,
+   path: "/",
   });
 
   res.json({
